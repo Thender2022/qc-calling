@@ -4,6 +4,37 @@ import { z } from 'zod'
 import { sql } from '@vercel/postgres'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
+import { signIn } from '@/auth';
+import { AuthError } from 'next-auth';
+
+export type AuthResult = {
+  success: boolean;
+  message?: string;
+};
+
+export async function authenticate(
+  prevState: any,
+  formData: FormData
+): Promise<AuthResult> {
+  try {
+    const email = formData.get('email')?.toString() || '';
+    const password = formData.get('password')?.toString() || '';
+
+    const result = await signIn('credentials', {
+      redirect: false,
+      email,
+      password,
+    });
+
+    if (result?.error) {
+      return { success: false, message: result.error };
+    }
+
+    return { success: true };
+  } catch (error: any) {
+    return { success: false, message: error?.message || 'Something went wrong.' };
+  }
+}
 
 const FormSchema = z.object({
   id: z.string(),

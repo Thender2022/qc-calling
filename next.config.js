@@ -1,8 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    experimental: {
-        ppr: 'incremental'
-      }
+  experimental: {
+    serverActions: {},       // empty object instead of `true`
+    cacheComponents: true,   // replaces `ppr: 'incremental'`
+  },
 };
 
 module.exports = nextConfig;
