@@ -23,7 +23,6 @@
     "next": "16.0.10",
     "next-auth": "5.0.0-beta.30",
     "postcss": "8.4.31",
-    "postgres": "^3.4.7",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "sharp": "^0.33.3",
